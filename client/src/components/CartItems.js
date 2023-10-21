@@ -4,10 +4,15 @@ import { Link, useParams } from 'react-router-dom'
 import { addItemsToCart, removeItemsFromCart } from "../actions/cartAction";
 
 const CartItems = ({ item }) => {
+
+  
+ 
     const dispatch = useDispatch();
     const { id } = useParams();
     const { cartItems } = useSelector((state) => state.cart);
-
+    const { error, loading, isAuthenticated, user, } = useSelector(
+        (state) => state.user
+    );
 
     const increaseQuantity = (id, quantity, stock) => {
         const newQty = quantity + 1;
@@ -39,7 +44,7 @@ const CartItems = ({ item }) => {
                     <div className="col-span-4">
                         <div className='flex gap-2'>
                             <div>
-                                <img src={item.image} alt={item.name} width={50} />
+                                <img src={item.images} alt={item.name} width={50} />
                             </div>
                             <div>
                                 <Link to={`/products/${item.product}`} >{item.name}</Link>

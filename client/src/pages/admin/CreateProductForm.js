@@ -10,6 +10,7 @@ const CreateProductForm = () => {
     const dispatch = useDispatch();
 
 
+
     const { loading, error, success } = useSelector((state) => state.newProduct);
 
     const navigate = useNavigate();
@@ -140,6 +141,7 @@ const CreateProductForm = () => {
                                 />
                             </div>
                             <button
+                                // onClick={checkOutHandler}
                                 type="submit"
                                 disabled={loading ? true : false}
                                 className="w-full px-8 py-3 font-semibold rounded-md  bg-cyan-600 text-white"

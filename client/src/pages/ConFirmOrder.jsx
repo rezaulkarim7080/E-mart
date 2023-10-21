@@ -29,8 +29,8 @@ const ConFirmOrder = () => {
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
 
-    // navigate("/payment/process");
-    navigate("/success");
+    navigate("/payment/process");
+    // navigate("/success");
   };
   return (
     <div className="px-10">
@@ -58,7 +58,7 @@ const ConFirmOrder = () => {
                         className="grid grid-cols-3 items-center  bg-slate-100 rounded-xl "
                       >
                         <div>
-                          <img src={item.image} alt={item.name} width={50} />
+                          <img src={item.images} alt={item.name} width={50} />
                         </div>
                         <div>
                           <h1>{item.name}</h1>

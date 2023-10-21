@@ -16,11 +16,17 @@ export const UserUpdate = (userData) => axios.put(`${url2}/me/update`, userData)
 export const UserLogOut = () => axios.get(`${url2}/logout`);
 export const USERloader = () => axios.get(`${url2}/me`);
 
+
+
 //////
 
-export const createNewOrder = (order) => axios.post(`${url2}/order/new`, order);
-export const SeeMyOrder = () => axios.get(`${url2}/order/new`);
+export const createnewOrder = (order, config) => axios.post(`${url2}/order/new`, order, config);
+export const SeeMyOrder = () => axios.get(`${url2}/orders/me`);
+
+
 //
+
+
 export const SeeAllOrderAdmin = () => axios.get(`${url2}/admin/orders`);
 export const UpdateOrderAdmin = (id, order) => axios.put(`${url2}/admin/order/${id}`, id, order);
 export const DelteteOrderAdmin = (id) => axios.delete(`${url2}/admin/order/${id}`, id);
@@ -28,4 +34,4 @@ export const getOrderDetails = (id) => axios.get(`${url2}/order/${id}`, id);
 
 ///
 export const PaymentKey = () => axios.get(`${url2}/stripeapikey`);
-export const PaymentKeyData = (paymentData) => axios.post(`${url2}/payment/process`, paymentData);
+export const PaymentKeyData = (paymentData, config) => axios.post(`${url2}/payment/process`, paymentData, config);

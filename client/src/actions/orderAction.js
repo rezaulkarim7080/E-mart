@@ -24,6 +24,7 @@ import * as api from '../api';
 
 
 // Create Order
+// Create Order
 export const createOrder = (order) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_ORDER_REQUEST });
@@ -33,7 +34,8 @@ export const createOrder = (order) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
-    const { data } = await api.createNewOrder(order, config);
+
+    const { data } = await api.createnewOrder(order, config);
 
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {

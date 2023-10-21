@@ -7,33 +7,29 @@ import ErrorHandler from "../utils/ErrorHandler.js";
 
 
 export const createOrder = catchAsyncErrors(async (req, res, next) => {
-
     const {
         shippingInfo,
         orderItems,
-        paymentInfo,
         itemsPrice,
         taxPrice,
         shippingPrice,
         totalPrice,
     } = req.body;
 
-    const order = await Order.create(
-        {
-            shippingInfo,
-            orderItems,
-            paymentInfo,
-            itemsPrice,
-            taxPrice,
-            shippingPrice,
-            totalPrice,
-            paidAt: Date.now(),
-            user: req.user._id,
-        }
-    );
+    const order = await Order.create({
+        shippingInfo,
+        orderItems,
+        itemsPrice,
+        taxPrice,
+        shippingPrice,
+        totalPrice,
+        paidAt: Date.now(),
+        user: req.user._id,
+    });
+
     res.status(201).json({
         success: true,
-        message: "Order Created succesfully",
+        message: "Order Created successfully",
         order,
     });
 });
@@ -63,7 +59,7 @@ export const getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 export const getMyOrders = catchAsyncErrors(async (req, res, next) => {
     const orders = await Order.find({ user: req.user._id }).populate(
         "user",
-        "name email"
+        "name", "email"
     );
     res.status(200).json({
         success: true,

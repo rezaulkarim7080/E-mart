@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable jsx-a11y/heading-has-content */
 import React, { useEffect, useState } from "react";
 import PageNavigation from "../components/PageNavigation";
@@ -32,11 +33,20 @@ const SinglePageDetails = ({ match }) => {
     (state) => state.productDetails
   );
 
+  const { user } = useSelector((state) => state.user);
+
   useEffect(() => {
     dispatch(getProductDetails(id));
   }, [dispatch, id]);
 
   const addToCartHandler = () => {
+    // {
+    //   user.role === "admin"
+    //     ? alert(
+    //         "You cannot buy because you are admin/saller you have to login as user/buyer "
+    //       )
+    //     : dispatch(addItemsToCart(id, quantity));
+    // }
     dispatch(addItemsToCart(id, quantity));
   };
 

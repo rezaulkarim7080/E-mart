@@ -11,19 +11,13 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import * as api from "../api";
-import { loadStripe } from "@stripe/stripe-js";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-
   const dispatch = useDispatch();
-  const stripePromise = loadStripe(
-    "pk_test_51Nw5FVSF3tLIpWGRPJfEjicRMYQ5azV47z4rELmfa60eWwUwGooGsQSg7QXT3ftQPu9BYAzPrmIw6ZbWUDy1SxQB00vpCGmady"
-  ); // Replace with your actual publishable key
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);
-
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const { error } = useSelector((state) => state.newOrder);
@@ -76,7 +70,7 @@ const Payment = () => {
 
       if (result.error) {
         payBtn.current.disabled = false;
-        alert.error(result.error.message);
+        alert(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
           order.paymentInfo = {
@@ -86,12 +80,12 @@ const Payment = () => {
           dispatch(createOrder(order));
           navigate("/success");
         } else {
-          alert.error("There's some issue while processing payment ");
+          alert("There's some issue while processing payment ");
         }
       }
     } catch (error) {
       payBtn.current.disabled = false;
-      alert.error(error.response.data.message);
+      alert(error.response.data.message);
     }
   };
 
@@ -105,24 +99,23 @@ const Payment = () => {
   return (
     <>
       <CheckoutSteps activeStep={2} />
-      <div className="paymentContainer">
-        <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
+      <div className="">
+        <form className="" onSubmit={(e) => submitHandler(e)}>
           <h1>Card Info</h1>
           <div>
-            <CardNumberElement className="paymentInput" />
+            <CardNumberElement className="w-full px-3 py-2 border rounded-md text-black" />
           </div>
           <div>
-            <CardExpiryElement className="paymentInput" />
+            <CardExpiryElement className="w-full px-3 py-2 border rounded-md text-black" />
           </div>
           <div>
-            <CardCvcElement className="paymentInput" />
+            <CardCvcElement className="w-full px-3 py-2 border rounded-md text-black" />
           </div>
 
           <input
             type="submit"
-            value={`Pay - ₹${orderInfo && orderInfo.totalPrice}`}
-            ref={payBtn}
             className="paymentFormBtn"
+            ref={payBtn}
           />
         </form>
       </div>

@@ -9,7 +9,9 @@ import { login, clearErrors } from "../actions/userAction";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading, error, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -21,6 +23,16 @@ const Login = () => {
     dispatch(login(email, password));
     navigate("/account");
   };
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      dispatch(clearErrors());
+    }
+
+    if (isAuthenticated) {
+      navigate("/account");
+    }
+  }, [dispatch, error, navigate, isAuthenticated]);
 
   return (
     <div className="h-screen">
